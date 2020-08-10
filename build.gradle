@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+}
+
+group 'dev.stashy.midibind'
+version '0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "Midifunk"
+        url = "https://maven.pkg.github.com/stashymane/midifunk"
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_PACKAGE_TOKEN")
+        }
+    }
+}
+
+application {
+    mainClassName = "${group}.MainKt"
+}
+
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'dev.stashy.midifunk:midifunk:0.1.0'
+    implementation 'no.tornado:tornadofx:1.7.20'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
