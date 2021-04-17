@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.20'
 }
 
 group 'dev.stashy.midibind'
@@ -9,14 +9,14 @@ version '0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven {
-        name = "Midifunk"
-        url = "https://maven.pkg.github.com/stashymane/midifunk"
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
-            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_PACKAGE_TOKEN")
-        }
-    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'dev.stashy.midifunk:midifunk:0.3.0'
+    implementation 'no.tornado:tornadofx:1.7.20'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.8'
+    testCompile group: 'junit', name: 'junit', version: '4.13.1'
 }
 
 application {
@@ -28,11 +28,4 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'dev.stashy.midifunk:midifunk:0.1.0'
-    implementation 'no.tornado:tornadofx:1.7.20'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
